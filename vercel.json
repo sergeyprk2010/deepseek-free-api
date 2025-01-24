@@ -1,22 +1,22 @@
 {
+    "version": 2,
     "builds": [
         {
-            "src": "./dist/*.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "./dist/index.js",
-            "use": "@vercel/node"
+            "src": "package.json",
+            "use": "@vercel/node",
+            "config": {
+                "buildCommand": "npm run build"
+            }
         }
     ],
     "routes": [
         {
-            "src": "/",
-            "dest": "/dist/welcome.html"
+            "src": "/v1/chat/completions",
+            "dest": "/dist/index.js"
         },
         {
             "src": "/(.*)",
-            "dest": "/dist",
+            "dest": "/dist/index.js",
             "headers": {
                 "Access-Control-Allow-Credentials": "true",
                 "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
